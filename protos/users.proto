@@ -1,0 +1,37 @@
+syntax = "proto3";
+package users;
+
+message User {
+    uint32 id = 1;
+    string name = 2;
+}
+
+message UserRequest {
+    uint32 id = 1;
+}
+
+message UserResponse {
+    User user = 1;
+}
+
+message UsersRequest {
+    repeated uint32 id = 1;
+}
+
+message UsersResponse {
+    repeated User user = 1;
+}
+
+message UsersRequestStream {
+
+}
+
+message UsersResponseStream {
+    User user = 1;
+}
+
+service Users {
+    rpc GetUser (UserRequest) returns (UserResponse);
+    rpc GetUsers (UsersRequest) returns (UsersResponse);
+    rpc GetUsersAll (UsersRequestStream) returns (stream UsersResponseStream);
+}
